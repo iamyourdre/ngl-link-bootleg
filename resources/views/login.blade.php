@@ -6,22 +6,12 @@
 
 <div class="container mx-auto">
     <form action="#" method="POST" class="md:w-1/2">
-        @if(isset($response))
-        @if($response->getStatusCode() == 201)
-        <div class="bg-green-500 text-white p-4 mb-4">
-            {{ $response->json()['message'] }}
-        </div>
-        <div class="bg-white p-4 rounded shadow">
-            Nama: {{ $response->json()['user']['nama'] }}<br>
-            Email: {{ $response->json()['user']['email'] }}<br>
-        </div>
-        @else
-        <div class="bg-red-500 text-white p-4 mb-4">
-            {{ $response->json()['message'] }}
-        </div>
-        @endif
-        @endif
 
+        @if(session('success'))
+        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
+            <p class="font-bold">{{ session('success') }}</p>
+        </div>
+        @endif
 
         @csrf
         <div class="mb-3">
