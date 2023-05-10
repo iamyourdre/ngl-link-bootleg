@@ -45,14 +45,7 @@
         </div>
     </div>
 
-    <script src=""></script>
 </body>
-
-<script>
-    function toggleMenu() {
-        document.getElementById('mobileMenu').classList.toggle('hidden')
-    }
-</script>
-
+<script src="../../js/script.js"></script>
 
 </html>
