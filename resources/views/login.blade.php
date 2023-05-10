@@ -5,11 +5,22 @@
 @section('content')
 
 <div class="container mx-auto">
-    <form action="#" method="POST" class="md:w-1/2">
+    <form action="{{ route('login.submit') }}" method="POST" class="md:w-1/2">
 
         @if(session('success'))
         <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
             <p class="font-bold">{{ session('success') }}</p>
+        </div>
+        @endif
+
+        @if ($errors->any())
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+            <p class="font-bold">Error</p>
+            <ul class="mt-2 list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
         @endif
 
@@ -20,11 +31,32 @@
         </div>
         <div class="mb-5">
             <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-            <input type="password" class="appearance-none border rounded w-full py-2 px-3 text-gray-700" name="password" id="password">
+            <div class="relative">
+                <input type="password" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 pr-10" name="password" id="password">
+                <button type="button" class="absolute inset-y-0 right-0 px-3 py-2 text-gray-600 hover:text-gray-800" onclick="togglePasswordVisibility()">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
         </div>
         <div class="mb-3 col-span-2">
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Daftar</button>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Masuk</button>
         </div>
     </form>
 </div>
+<script>
+    function togglePasswordVisibility() {
+        let passwordInput = document.getElementById("password");
+        let icon = document.querySelector("#password + button i");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+</script>
 @endsection
